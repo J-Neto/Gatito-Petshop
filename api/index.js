@@ -5,6 +5,8 @@ const config = require('config');
 
 app.use(bodyParser.json());
 
+app.use('')
+
 app.listen(config.get('api.porta'), () => {
     console.log('Hello World');
 });
