@@ -4,3 +4,4 @@
 - body-parser
 - sequelize
 - mysql2
+- config

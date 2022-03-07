@@ -1,0 +1,2 @@
+- arquivos de conexão com o bd
+- Usar isso aqui por padrão pelo curso

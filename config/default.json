@@ -1,0 +1,12 @@
+// Usar isso aqui por padrão pelo curso
+{
+    "mysql": {
+        "host": "127.0.0.1",
+        "usuario": "root",
+        "senha": "123456",
+        "banco-de-dados": "petshop"
+    },
+    "api": {
+        "porta": 3000
+    }
+}
