@@ -2,8 +2,9 @@
     "mysql": {
         "host": "127.0.0.1",
         "usuario": "root",
-        "senha": "123456",
-        "banco-de-dados": "petshop"
+        "senha": "admin",
+        "banco-de-dados": "petshop",
+        "port":"3307"
     },
     "api": {
         "porta": 3000
