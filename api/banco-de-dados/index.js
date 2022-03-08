@@ -1,3 +1,5 @@
+// Arquivo de credenciais de conexão do banco-de-dados
+
 const Sequelize = require('sequelize');
 // const config = require('config');
 

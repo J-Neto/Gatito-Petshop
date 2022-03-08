@@ -9,5 +9,5 @@ app.use(bodyParser.json());
 app.use('/api/fornecedores', roteador);
 
 app.listen(config.get('api.porta'), () => {
-    console.log('Hello World');
+    console.log('A API está funcionando!');
 });
