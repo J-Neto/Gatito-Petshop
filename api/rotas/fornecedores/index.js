@@ -6,14 +6,14 @@ const Fornecedor = require('./Fornecedor');
 const NaoEncontrado = require('../../erros/NaoEncontrado');
 
 // Listar fornecedores
-roteador.get('/', async (req, res) => {
+roteador.get('/', async (req, res, proximo) => {
     const resultados = await TabelaFornecedor.listar();
     res.status(200);
     res.send(JSON.stringify(resultados));
 });
 
 // Cadastrar fornecedor
-roteador.post('/', async (req, res) => {
+roteador.post('/', async (req, res, proximo) => {
     try {
         const dadosRecebidos = req.body;
         const fornecedor = new Fornecedor(dadosRecebidos);
@@ -21,15 +21,12 @@ roteador.post('/', async (req, res) => {
         res.status(201);
         res.send(JSON.stringify(fornecedor))
     } catch (erro) {
-        res.status(400);
-        res.send(JSON.stringify({
-            mensagem: erro.message
-        }))
+        proximo(erro);
     }
 })
 
 // Detalhes de um fornecedor
-roteador.get('/:idFornecedor', async (req, res) =>{
+roteador.get('/:idFornecedor', async (req, res, proximo) =>{
     try{
         // Recebendo o id por parâmtro do user
         const id = req.params.idFornecedor;
@@ -41,10 +38,7 @@ roteador.get('/:idFornecedor', async (req, res) =>{
         // Respondendo ao usuário o fornecedor encontrado
         res.send(JSON.stringify(fornecedor));
     }catch(erro) {
-        res.status(404);
-        res.send(JSON.stringify({
-            mensagem: erro.message
-        }))
+        proximo(erro);
     }
 })
 
@@ -73,7 +67,7 @@ roteador.put('/:idFornecedor', async (req, res, proximo) => {
 })
 
 // Removendo um fornecedor
-roteador.delete('/:idFornecedor', async (req, res) => {
+roteador.delete('/:idFornecedor', async (req, res, proximo) => {
     try {
         const id = req.params.idFornecedor;
         const fornecedor = new Fornecedor({id: id});
@@ -82,12 +76,7 @@ roteador.delete('/:idFornecedor', async (req, res) => {
         res.status(204);
         res.end();
     } catch (erro) {
-        res.status(404);
-        res.send(
-            JSON.stringify({
-                mensagem: erro.message
-            })
-        )
+        proximo(erro);
     }
 
 })
