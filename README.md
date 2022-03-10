@@ -23,3 +23,4 @@
     - sequelize
     - mysql2
     - config
+    - jsontoxml
