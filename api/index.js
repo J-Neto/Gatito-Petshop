@@ -9,6 +9,7 @@ const DadosNaoFornecidos = require('./erros/DadosNaoFornecidos');
 const ValorNaoSuportado = require('./erros/ValorNaoSuportado');
 const roteador = require('./rotas/fornecedores');
 const formatosAceitos = require('./Serializador').formatosAceitos;
+const SerializadorErro = require('./Serializador').SerializadorErro;
 
 app.use(bodyParser.json());
 
@@ -47,12 +48,11 @@ app.use((erro, req, res, proximo) => {
     }
 
     res.status(status);
-    res.send(
-        JSON.stringify({
-            message: erro.message,
-            id: erro.idErro
-        })
+    const serializador = new SerializadorErro(
+        res.getHeader('Content-Type'),
     )
+
+    res.send(serializador.serializar({id: erro.idErro, mensagem: erro.message}))
 })
 
 app.listen(config.get('api.porta'), () => {
