@@ -12,9 +12,7 @@ const SerializadorFornecedor = require('../../Serializador').SerializadorFornece
 roteador.get('/', async (req, res, proximo) => {
     const resultados = await TabelaFornecedor.listar();
     res.status(200);
-    const serializador = new SerializadorFornecedor(
-        res.getHeader('Content-Type')
-    );
+    const serializador = new SerializadorFornecedor(res.getHeader('Content-Type'));
     res.send(serializador.serializar(resultados));
 });
 
@@ -45,7 +43,8 @@ roteador.get('/:idFornecedor', async (req, res, proximo) =>{
         await fornecedor.carregar();
         res.status(200);
         const serializador = new SerializadorFornecedor(
-            res.getHeader('Content-Type')
+            res.getHeader('Content-Type'),
+            ['email', 'dataCriacao', 'dataAtualizacao', 'versao']
         );
         // Respondendo ao usuário o fornecedor encontrado
         res.send(serializador.serializar(fornecedor));
