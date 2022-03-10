@@ -1,3 +1,5 @@
+// O serializador verifica se os dados estão em formato válido para a aplicação
+// Configura o tipo de dado aceito na req e retornado na res
 const ValorNaoSuportado = require('./erros/ValorNaoSuportado');
 const jsontoxml = require('jsontoxml');
 
@@ -7,7 +9,6 @@ class Serializador {
     }
 
     xml (dados) {
-        // return jsontoxml({fornecedor: dados});
         let tag = this.tagSingular;
 
         if (Array.isArray(dados)) {

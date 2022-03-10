@@ -1,3 +1,4 @@
+// Recebe os dados na req, prepara eles e envia para o TabelaFornecedor que executa as funções do banco de dados
 const TabelaFornecedor = require('./TabelaFornecedor');
 const CampoInvalido = require('../../erros/CampoInvalido');
 const DadosNaoFornecidos = require('../../erros/DadosNaoFornecidos');

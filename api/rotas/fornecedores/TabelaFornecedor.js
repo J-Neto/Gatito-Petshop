@@ -1,3 +1,7 @@
+// Responsável por executar as funções do banco de dados referentes a tabela do Fornecedor
+// Insere, atualiza, deleta, retorna
+// Ele recebe o objeto/dados da classe Fornecedor a serem inseridos no banco e realiza as opções desejadas
+
 const Modelo = require('./modeloTabelaFornecedor');
 const NaoEncontrado = require('../../erros/NaoEncontrado');
 

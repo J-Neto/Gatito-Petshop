@@ -1,10 +1,8 @@
 // Rotas
-
 const roteador = require('express').Router();
 const TabelaFornecedor = require('./TabelaFornecedor');
 const Fornecedor = require('./Fornecedor');
 const NaoEncontrado = require('../../erros/NaoEncontrado');
-// const SerializadorFornecedor = require('../../Serializador').SerializadorFornecedor;
 const SerializadorFornecedor = require('../../Serializador').SerializadorFornecedor;
 
 
