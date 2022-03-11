@@ -90,6 +90,7 @@ roteador.delete('/:idFornecedor', async (req, res, proximo) => {
 
 })
 
+// Listando produtos de um fornecedor
 const roteadorProdutos = require('./produtos');
 roteador.use('/:idFornecedor/produtos', roteadorProdutos);
 
