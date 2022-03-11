@@ -92,6 +92,21 @@ roteador.delete('/:idFornecedor', async (req, res, proximo) => {
 
 // Listando produtos de um fornecedor
 const roteadorProdutos = require('./produtos');
-roteador.use('/:idFornecedor/produtos', roteadorProdutos);
+
+const verificarFornecedor = async (req, res, proximo) =>{
+    try {
+        const id = req.params.idFornecedor;
+        const fornecedor = new Fornecedor({ id: id});
+        await fornecedor.carregar();
+        
+        // Disponibilizando este recurso a todas as rotas que vierem após este middleware
+        requisicao.fornecedor = fornecedor;
+        proximo()
+    } catch (erro) {
+        proximo(erro);
+    }
+}
+
+roteador.use('/:idFornecedor/produtos', verificarFornecedor, roteadorProdutos);
 
 module.exports = roteador;
