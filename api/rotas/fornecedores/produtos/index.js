@@ -9,16 +9,30 @@ roteador.get('/', async (req, res) => {
     )
 });
 
-roteador.post('/', async (req, res) => {
-    const idFornecedor = req.params.idFornecedor;
-    const corpo = req.body;
+roteador.post('/', async (req, res, proximo) => {
+    try {
+        const idFornecedor = req.params.idFornecedor;
+        const corpo = req.body;
+        // Unindo os dados recebidos
+        const dados = Object.assign({}, corpo, { fornecedor: idFornecedor })
+        const produto = new Produto(dados);
+        await produto.criar();
+        res.status(201);
+        res.send(produto);
+    } catch (erro) {
+        proximo(erro);
+    }
+})
 
-    // Unindo os dados recebidos
-    const dados = Object.assign({}, corpo, { fornecedor: idFornecedor })
-    const produto = new Produto(dados);
-    await produto.criar();
-    res.status(201);
-    res.send(produto);
+roteador.delete('/:id', async (req, res) => {
+    const dados = {
+        id: req.params.id,
+        idFornecedor: req.params.idFornecedor
+    }
+    const produto = new Produto({id: dados.id, fornecedor: dados.idFornecedor});
+    await produto.apagar();
+    res.status(204);
+    res.end()
 })
 
 module.exports = roteador;
