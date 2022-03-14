@@ -40,6 +40,17 @@ class Produto {
             throw new Error('O campo preço está inválido');
         }
     }
+
+    async carregar () {
+        const encontrado = await Tabela.pegarPorId(this.id, this.fornecedor);
+        this.titulo = encontrado.titulo;
+        this.preco = encontrado.preco;
+        this.estoque = encontrado.estoque;
+        this.fornecedor = encontrado.fornecedor;
+        this.dataCriacao = encontrado.dataCriacao;
+        this.dataAtualizacao = encontrado.dataAtualizacao;
+        this.versao = encontrado.versao;
+    }
 }
 
 module.exports = Produto;
