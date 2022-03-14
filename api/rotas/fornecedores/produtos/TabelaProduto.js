@@ -1,6 +1,7 @@
 // DAO = Data Access Object
 
 const Modelo = require('./ModeloTabelaProduto');
+const instancia = require('../../../banco-de-dados');
 
 module.exports = {
     // Pegando objetos a partir do id do fornecedor
@@ -49,5 +50,23 @@ module.exports = {
                 where: dadosDoProduto
             }
         )
+    },
+
+    subtrair (idProduto, idFornecedor, campo, quantidade) {
+        // Usamos este método para evitar conflito em diversas operações de venda e redução do estoque
+        return instancia.transaction(async transacao => {
+            const produto = await Modelo.findOne({
+                where: {
+                    id: idProduto,
+                    fornecedor: idFornecedor
+                }
+            })
+
+            produto[campo] = quantidade
+
+            await produto.save()
+
+            return produto
+        })
     }
 }

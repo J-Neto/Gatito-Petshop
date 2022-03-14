@@ -52,7 +52,7 @@ class Produto {
         this.versao = encontrado.versao;
     }
 
-    async atualizar () {
+    atualizar () {
         const dadosParaAtualizar = {};
         
         if (typeof this.titulo == 'string' && this.titulo.length > 0) {
@@ -79,6 +79,16 @@ class Produto {
             dadosParaAtualizar
         )
     }
+
+    diminuirEstoque () {
+        return Tabela.subtrair(
+            this.id,
+            this.fornecedor,
+            'estoque',
+            this.estoque
+        )
+    }
+
 }
 
 module.exports = Produto;
