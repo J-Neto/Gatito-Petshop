@@ -8,7 +8,8 @@ module.exports = {
         return Modelo.findAll({
             where: {
                 fornecedor: idFornecedor
-            }
+            },
+            raw: true
         });
     },
 
