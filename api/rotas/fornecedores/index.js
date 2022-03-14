@@ -100,7 +100,7 @@ const verificarFornecedor = async (req, res, proximo) =>{
         await fornecedor.carregar();
         
         // Disponibilizando este recurso a todas as rotas que vierem após este middleware
-        requisicao.fornecedor = fornecedor;
+        req.fornecedor = fornecedor;
         proximo()
     } catch (erro) {
         proximo(erro);
