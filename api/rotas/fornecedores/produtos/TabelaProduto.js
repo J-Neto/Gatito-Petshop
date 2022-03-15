@@ -2,6 +2,7 @@
 
 const Modelo = require('./ModeloTabelaProduto');
 const instancia = require('../../../banco-de-dados');
+const NaoEncontrado = require('../../../erros/NaoEncontrado');
 
 module.exports = {
     // Pegando objetos a partir do id do fornecedor
@@ -37,7 +38,7 @@ module.exports = {
         })
 
         if (!encontrado) {
-            throw new Error('produto não foi encontrado');
+            throw new NaoEncontrado('Produto');
         }
 
         return encontrado;

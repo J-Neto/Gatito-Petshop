@@ -71,6 +71,29 @@ roteador.get('/:id', async (req, res, proximo) => {
     }
 })
 
+// Enviando somente os dados do cabeçalho da requisição
+roteador.head(':/id', async (req, res, proximo) => {
+    try {
+        const dados = {
+            id: req.params.id,
+            idFornecedor: req.fornecedor.id
+        }
+        const produto = new Produto({
+            id: dados.id,
+            fornecedor: dados.idFornecedor
+        })
+        await produto.carregar();
+        res.status(200);
+        res.set('ETag', produto.versao);
+        const timestamp = (new Date(produto.dataAtualizacao)).getTime();
+        res.set('Last-Modified', timestamp);
+        res.status(200);
+        res.end();
+    } catch (erro) {
+        proximo(erro);
+    }
+})
+
 roteador.put('/:id', async (req, res, proximo) => {
     try {
         const dados = Object.assign(

@@ -21,8 +21,7 @@ module.exports = {
             }
         });
         if (!encontrado) {
-            console.log('Fornecedor não encontrado!');
-            throw new NaoEncontrado();
+            throw new NaoEncontrado('Fornecedor');
         }
         return encontrado;
     },
