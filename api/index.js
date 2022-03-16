@@ -11,6 +11,7 @@ const ValorNaoSuportado = require('./erros/ValorNaoSuportado');
 const roteador = require('./rotas/fornecedores');
 const formatosAceitos = require('./Serializador').formatosAceitos;
 const SerializadorErro = require('./Serializador').SerializadorErro;
+const cors = require('cors');
 
 app.use(bodyParser.json());
 
@@ -34,6 +35,14 @@ app.use((req, res, proximo) => {
     }
 
     res.setHeader('Content-Type', formatoRequisitado);
+    proximo();
+})
+
+// app.use(cors());
+
+app.use((req, res, proximo) => {
+    res.header('Access-Control-Allow-Origin', 'https://developer.mozilla.org/pt-BR/');
+    // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     proximo();
 })
 

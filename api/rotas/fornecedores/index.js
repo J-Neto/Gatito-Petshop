@@ -5,6 +5,13 @@ const Fornecedor = require('./Fornecedor');
 const NaoEncontrado = require('../../erros/NaoEncontrado');
 const SerializadorFornecedor = require('../../Serializador').SerializadorFornecedor;
 
+// Quais operações são permitidas pela API nas req dos navegadores (diz respeito ao CORS)
+roteador.options('/', (req, res) => {
+    res.set('Access-Control-Allow-Methods', 'GET, POST');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+    res.status(204);
+    res.end();
+});
 
 // Listar fornecedores
 roteador.get('/', async (req, res, proximo) => {
@@ -30,6 +37,12 @@ roteador.post('/', async (req, res, proximo) => {
     }
 })
 
+roteador.options('/:idFornecedor', (req, res) => {
+    res.set('Access-Control-Allow-Methods', 'GET, PUT, DELETE');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+    res.status(204);
+    res.end();
+});
 // Detalhes de um fornecedor
 roteador.get('/:idFornecedor', async (req, res, proximo) =>{
     try{
